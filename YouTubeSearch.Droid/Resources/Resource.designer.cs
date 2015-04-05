@@ -126,6 +126,9 @@ namespace YouTubeSearch.Droid
 			// aapt resource value: 0x7f040000
 			public const int library_name = 2130968576;
 			
+			// aapt resource value: 0x7f040003
+			public const int search = 2130968579;
+			
 			static String()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

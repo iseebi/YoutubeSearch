@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello World, Click Me!</string>
     <string name="app_name">YouTubeSearch.Droid</string>
+    <string name="search">検索</string>
 </resources>
