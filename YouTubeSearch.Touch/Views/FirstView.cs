@@ -20,15 +20,53 @@ namespace YouTubeSearch.Touch.Views
             {
                EdgesForExtendedLayout = UIRectEdge.None;
             }
-			   
-            var label = new UILabel(new CGRect(10, 10, 300, 40));
-            Add(label);
-            var textField = new UITextField(new CGRect(10, 50, 300, 40));
-            Add(textField);
+
+            var searchField = new UITextField(CGRect.Empty)
+            {
+                TranslatesAutoresizingMaskIntoConstraints = false,
+                BorderStyle = UITextBorderStyle.RoundedRect
+            };
+            View.Add(searchField);
+            var searchButton = new UIButton(UIButtonType.System)
+            {
+                TranslatesAutoresizingMaskIntoConstraints = false,
+            };
+            searchButton.SetTitle("Search", UIControlState.Normal);
+            searchButton.SetContentHuggingPriority(250, UILayoutConstraintAxis.Horizontal);
+            View.Add(searchButton);
+            var tableView = new UITableView(CGRect.Empty)
+            {
+                TranslatesAutoresizingMaskIntoConstraints = false
+            };
+            View.Add(tableView);
+
+            View.AddConstraints(new []
+                {
+                    NSLayoutConstraint.Create(searchField, NSLayoutAttribute.Top, NSLayoutRelation.Equal, 
+                        TopLayoutGuide, NSLayoutAttribute.Bottom, 1.0f, 10),
+                    NSLayoutConstraint.Create(searchField, NSLayoutAttribute.Left, NSLayoutRelation.Equal, 
+                        View, NSLayoutAttribute.Left, 1.0f, 10),
+                    NSLayoutConstraint.Create(searchField, NSLayoutAttribute.Right, NSLayoutRelation.Equal, 
+                        searchButton, NSLayoutAttribute.Left, 1.0f, -10),
+
+                    NSLayoutConstraint.Create(searchButton, NSLayoutAttribute.CenterY, NSLayoutRelation.Equal, 
+                        searchField, NSLayoutAttribute.CenterY, 1.0f, 0),
+                    NSLayoutConstraint.Create(searchButton, NSLayoutAttribute.Right, NSLayoutRelation.Equal, 
+                        View, NSLayoutAttribute.Right, 1.0f, -10),
+
+                    NSLayoutConstraint.Create(tableView, NSLayoutAttribute.Top, NSLayoutRelation.Equal, 
+                        searchField, NSLayoutAttribute.Bottom, 1.0f, 10),
+                    NSLayoutConstraint.Create(tableView, NSLayoutAttribute.Left, NSLayoutRelation.Equal, 
+                        View, NSLayoutAttribute.Left, 1.0f, 0),
+                    NSLayoutConstraint.Create(tableView, NSLayoutAttribute.Right, NSLayoutRelation.Equal, 
+                        View, NSLayoutAttribute.Right, 1.0f, 0),
+                    NSLayoutConstraint.Create(tableView, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, 
+                        View, NSLayoutAttribute.Bottom, 1.0f, 0),
+                });
 
             var set = this.CreateBindingSet<FirstView, Core.ViewModels.FirstViewModel>();
-            set.Bind(label).To(vm => vm.Hello);
-            set.Bind(textField).To(vm => vm.Hello);
+            set.Bind(searchField).To(vm => vm.SearchWord);
+            set.Bind(searchButton).To(vm => vm.DoSearchCommand);
             set.Apply();
         }
     }
