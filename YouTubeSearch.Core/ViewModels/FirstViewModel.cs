@@ -1,12 +1,20 @@
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.CrossCore;
 using System.Collections.Generic;
+using Cirrious.MvvmCross.Plugins.WebBrowser;
 
 namespace YouTubeSearch.Core.ViewModels
 {
     public class FirstViewModel 
 		: MvxViewModel
     {
+        readonly IMvxWebBrowserTask _webBrowserTask;
+
+        public FirstViewModel(IMvxWebBrowserTask webBrowserTask)
+        {
+            this._webBrowserTask = webBrowserTask;
+        }
+
         public string SearchWord
         {
             get { return _searchWord; }
@@ -40,5 +48,15 @@ namespace YouTubeSearch.Core.ViewModels
             }
         }
         List<YouTubeFeed> _searchResults;
+
+        public MvxCommand<YouTubeFeed> FeedSelectCommand
+        {
+            get
+            {
+                return _feedSelectCommand ?? (_feedSelectCommand = new MvxCommand<YouTubeFeed>(
+                        feed => _webBrowserTask.ShowWebPage(feed.Url)));
+            }
+        }
+        MvxCommand<YouTubeFeed> _feedSelectCommand;
     }
 }
