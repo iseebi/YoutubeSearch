@@ -25,6 +25,6 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        local:MvxBind="ItemsSource SearchResults"
+        local:MvxBind="ItemsSource SearchResults; ItemClick FeedSelectCommand"
         local:MvxItemTemplate="@layout/item_search_result" />
 </LinearLayout>
