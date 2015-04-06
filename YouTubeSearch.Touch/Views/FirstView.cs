@@ -73,6 +73,7 @@ namespace YouTubeSearch.Touch.Views
             set.Bind(searchField).To(vm => vm.SearchWord);
             set.Bind(searchButton).To(vm => vm.DoSearchCommand);
             set.Bind(source).For(v => v.ItemsSource).To(vm => vm.SearchResults);
+            set.Bind(source).For(v => v.SelectionChangedCommand).To(vm => vm.FeedSelectCommand);
             set.Apply();
         }
     }
