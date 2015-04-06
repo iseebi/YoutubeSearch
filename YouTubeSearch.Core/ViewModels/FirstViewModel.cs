@@ -1,5 +1,6 @@
 using Cirrious.MvvmCross.ViewModels;
 using Cirrious.CrossCore;
+using System.Collections.Generic;
 
 namespace YouTubeSearch.Core.ViewModels
 {
@@ -21,11 +22,23 @@ namespace YouTubeSearch.Core.ViewModels
         {
             get
             {
-                return _doSearchCommand ?? (_doSearchCommand = new MvxCommand(() => {
-                    Mvx.Trace("SearchTapped: {0}", SearchWord);
+                return _doSearchCommand ?? (_doSearchCommand = new MvxCommand(async () => {
+                    SearchResults = await YouTubeFeeds.Search(SearchWord);
                 }));
             }
         }
         MvxCommand _doSearchCommand;
+
+        public List<YouTubeFeed> SearchResults
+        {
+            get { return _searchResults;
+            }
+            set
+            {
+                _searchResults = value;
+                RaisePropertyChanged(() => SearchResults);
+            }
+        }
+        List<YouTubeFeed> _searchResults;
     }
 }

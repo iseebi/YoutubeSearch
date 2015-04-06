@@ -14,7 +14,7 @@ namespace YouTubeSearch.Core
         {
             var httpClient = new HttpClient(new NativeMessageHandler());
 
-            var xmlString = await httpClient.GetStringAsync(new Uri("http://gdata.youtube.com/feeds/api/videos?orderby=updated&vq=JAXA"));
+            var xmlString = await httpClient.GetStringAsync(new Uri("http://gdata.youtube.com/feeds/api/videos?orderby=updated&vq=" + Uri.EscapeDataString(keyword)));
 
             var ns = (XNamespace)"http://www.w3.org/2005/Atom";
             var mediaNs = (XNamespace)"http://search.yahoo.com/mrss/";
