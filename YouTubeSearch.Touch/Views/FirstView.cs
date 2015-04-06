@@ -4,6 +4,7 @@ using CoreGraphics;
 using Foundation;
 using ObjCRuntime;
 using UIKit;
+using Cirrious.MvvmCross.Binding.Touch.Views;
 
 namespace YouTubeSearch.Touch.Views
 {
@@ -64,9 +65,14 @@ namespace YouTubeSearch.Touch.Views
                         View, NSLayoutAttribute.Bottom, 1.0f, 0),
                 });
 
+            var source = new MvxSimpleTableViewSource(tableView, 
+                SearchResultTableViewCell.Key.ToString(), SearchResultTableViewCell.Key.ToString());
+            tableView.Source = source;
+
             var set = this.CreateBindingSet<FirstView, Core.ViewModels.FirstViewModel>();
             set.Bind(searchField).To(vm => vm.SearchWord);
             set.Bind(searchButton).To(vm => vm.DoSearchCommand);
+            set.Bind(source).For(v => v.ItemsSource).To(vm => vm.SearchResults);
             set.Apply();
         }
     }
