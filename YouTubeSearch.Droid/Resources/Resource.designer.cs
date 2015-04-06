@@ -85,6 +85,12 @@ namespace YouTubeSearch.Droid
 			// aapt resource value: 0x7f050000
 			public const int MvxBindingTagUnique = 2131034112;
 			
+			// aapt resource value: 0x7f050002
+			public const int button_search = 2131034114;
+			
+			// aapt resource value: 0x7f050001
+			public const int edittext_search = 2131034113;
+			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

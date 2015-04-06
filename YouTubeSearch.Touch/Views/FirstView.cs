@@ -75,6 +75,8 @@ namespace YouTubeSearch.Touch.Views
             set.Bind(source).For(v => v.ItemsSource).To(vm => vm.SearchResults);
             set.Bind(source).For(v => v.SelectionChangedCommand).To(vm => vm.FeedSelectCommand);
             set.Apply();
+
+            searchButton.TouchUpInside += (sender, e) => searchField.ResignFirstResponder();
         }
     }
 }
